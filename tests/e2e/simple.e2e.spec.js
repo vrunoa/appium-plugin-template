@@ -20,8 +20,10 @@ describe('appium-plugin-template e2e', async () => {
     }
     driver = await remote(appiumCaps)
     setupBindings(driver)
-    let pong = await driver.templatePing()
+    const pong = await driver.templatePing()
     expect(pong).to.eq('pong')
+    const echo = await driver.templateEcho('hello')
+    expect(echo).to.eql(['hello', 'hello', 'hello'])
   })
   after(async () => {
     await driver.deleteSession()
